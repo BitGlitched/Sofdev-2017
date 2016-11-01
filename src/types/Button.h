@@ -11,6 +11,14 @@ public:
 	float sizeX;
 	float sizeY;
 
+	Button(float xPos, float yPos, float sizX, float sizY)
+	{
+		positionX = xPos;
+		positionY = yPos;
+		sizeX = sizX;
+		sizeY = sizY;
+	}
+
 	bool CheckClick()
 	{
 		if (MousePositionX < positionX + sizeX && MousePositionX > positionX - sizeX && MousePositionY < positionY + sizeY && MousePositionY > positionY - sizeY)
