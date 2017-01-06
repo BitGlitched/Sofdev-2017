@@ -2,8 +2,12 @@
 #define MAIN_H
 
 #include <stdio.h>
+#include <string>
 
-extern float MousePositionX;
-extern float MousePositionY;
+#include "SDL.h"
+#include "SDL_image.h"
+
+extern SDL_Window* window;
+extern SDL_Renderer* renderer;
 
 #endif
