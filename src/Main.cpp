@@ -1,11 +1,14 @@
 #include "headers/Main.h"
 
-bool CloseWindow = false;
-
 const std::string windowTitle = "Open Circuit Sim";
 
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
+
+bool CloseWindow = false;
+Vector2 WindowSize;
+
+MouseData Mouse;
 
 int main(int argc, char** argv)
 {
@@ -75,7 +78,12 @@ int main(int argc, char** argv)
 		SDL_RenderClear(renderer);
 
 		//Updates everything such as mouse size, window size, etc etc
-		UpdateVars();
+		//Updates the mouse
+		Mouse.UpdateMouse();
+		//Gets the window size and stores it in a Vector2
+		int winSizeX, winSizeY;
+		SDL_GetWindowSize(window, &winSizeX, &winSizeY);
+		WindowSize = Vector2(winSizeX, winSizeY);
 
 		//Calls the function for the application frontend
 		Update();

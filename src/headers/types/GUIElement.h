@@ -6,7 +6,7 @@
 #include <string>
 
 #include "Vector2.h"
-
+#include "MouseData.h"
 
 class GUIElement
 {
@@ -52,6 +52,21 @@ public:
 	void Draw()
 	{
 		SDL_RenderCopy(renderer, image, NULL, &transform);
+	}
+
+	bool CheckHover(MouseData mouse)
+	{
+		//Checks to see if mouse x is within the size of the element
+		if (mouse.x > transform.x - ((float)transform.w / 2.0f) && mouse.x < transform.x + ((float)transform.w / 2.0f))
+		{
+			//Checks to see if mouse y is within the size of the element
+			if (mouse.y > transform.y - ((float)transform.h / 2.0f) && mouse.y < transform.y + ((float)transform.h / 2.0f))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 };
 
