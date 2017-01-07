@@ -1,5 +1,4 @@
 #include "headers/Main.h"
-#include "headers/Functions.h"
 
 bool CloseWindow = false;
 
@@ -54,11 +53,32 @@ int main(int argc, char** argv)
 		printf("Renderer created successfully!\n");
 	}
 
+	Startup();
 
 	printf("Starting to run main loop.\n");
 	while(!CloseWindow)
 	{
+		// event handling
+		SDL_Event e;
+		if (SDL_PollEvent(&e))
+		{
+			if (e.type == SDL_QUIT)
+			{
+				break;
+			}
+		}
+
+		//Sets the background color
+		//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+		//Clears the renderer's buffer
 		SDL_RenderClear(renderer);
+
+		//Updates everything such as mouse size, window size, etc etc
+		UpdateVars();
+
+		//Calls the function for the application frontend
+		Update();
 
 		SDL_RenderPresent(renderer);
 	}
