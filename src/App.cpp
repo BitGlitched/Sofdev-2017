@@ -1,24 +1,30 @@
 #include "headers/Main.h"
 #include "headers/types/GUIElement.h"
 
-#define TEX_PROTOTYPING "data/Prototyping.png"
+//Defining texture paths example:
+//#define TEX_EXAMPLE "data/imagename.png"
 
-GUIElement testElement;
+//Creating GUIElements example:
+//GUIElement element;
 
 //Function called once on startup
+//Actually make everything here
 void Startup()
 {
-	testElement = GUIElement(200.0f, 200.0f, 30.0f, 30.0f, TEX_PROTOTYPING);
+	//Making GUIElements example:
+	//element = GUIElement(200.0f, 200.0f, 30.0f, 30.0f, TEX_EXAMPLE);
+	//First argument provided is the x position, second is the y position, third is the x scale/size, fourth is the y scale/size, and fifth is the texture path
 }
 
 //Function updated every frame
 void Update()
 {
-	//Software code goes here
-	testElement.Draw();
+	//Drawing GUIElements example:
+	//element.Draw();
 
-	if (testElement.CheckHover(Mouse) && Mouse.LeftClickDown)
-	{
-		printf("Clicked!\n");
-	}
+	//Checking for clicking a GUIElement example:
+	//if (testElement.CheckHover(Mouse) && Mouse.LeftClickDown)
+	//{
+		//printf("Clicked!\n");
+	//}
 }
