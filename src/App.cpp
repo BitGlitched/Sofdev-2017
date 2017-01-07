@@ -17,7 +17,7 @@ void Update()
 	//Software code goes here
 	testElement.Draw();
 
-	if (testElement.CheckHover(Mouse) && Mouse.LeftClick)
+	if (testElement.CheckHover(Mouse) && Mouse.LeftClickDown)
 	{
 		printf("Clicked!\n");
 	}

@@ -56,14 +56,10 @@ public:
 
 	bool CheckHover(MouseData mouse)
 	{
-		//Checks to see if mouse x is within the size of the element
-		if (mouse.x > transform.x - ((float)transform.w / 2.0f) && mouse.x < transform.x + ((float)transform.w / 2.0f))
+		//Checks to see if the mouse is within the element
+		if (mouse.x > transform.x && mouse.x < transform.x + transform.w && mouse.y > transform.y && mouse.y < transform.y + transform.h)
 		{
-			//Checks to see if mouse y is within the size of the element
-			if (mouse.y > transform.y - ((float)transform.h / 2.0f) && mouse.y < transform.y + ((float)transform.h / 2.0f))
-			{
-				return true;
-			}
+			return true;
 		}
 
 		return false;

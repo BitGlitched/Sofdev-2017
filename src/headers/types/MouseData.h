@@ -1,25 +1,22 @@
 #ifndef MOUSEDATA_H
 #define MOUSEDATA_H
 
-enum ClickType
-{
-	LEFT_CLICK,
-	RIGHT_CLICK,
-	MIDDLE_CLICK
-};
-
 struct MouseData
 {
+public:
 	int x, y;
-	bool LeftClick;
-	bool RightClick;
-	bool MiddleClick;
+	bool LeftClickPressed;
+	bool LeftClickDown;
+	bool RightClickPressed;
+	bool RightClickDown;
+	bool MiddleClickPressed;
+	bool MiddleClickDown;
 
 	void UpdateMouse()
 	{
-		LeftClick = false;
-		RightClick = false;
-		MiddleClick = false;
+		LeftClickDown = false;
+		RightClickDown = false;
+		MiddleClickDown = false;
 
 		//Updates mouse position
 		SDL_GetMouseState(&x, &y);
@@ -27,19 +24,58 @@ struct MouseData
 		//Checks to see if the left mouse button is pressed
 		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))
 		{
-			LeftClick = true;
+			if (!LeftClickPressed)
+			{
+				LeftClickDown = true;
+			}
+			else
+			{
+				LeftClickDown = false;
+			}
+
+			LeftClickPressed = true;
+		}
+		else
+		{
+			LeftClickPressed = false;
 		}
 
 		//Checks to see if the right mouse button is pressed
-		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT))
+		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT) && !RightClickPressed)
 		{
-			RightClick = true;
+			if (!RightClickPressed)
+			{
+				RightClickDown = true;
+			}
+			else
+			{
+				RightClickDown = false;
+			}
+
+			RightClickPressed = true;
+		}
+		else
+		{
+			RightClickPressed = false;
 		}
 
 		//Checks to see if the middle mouse button is pressed
-		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
+		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_MIDDLE) && !MiddleClickPressed)
 		{
-			MiddleClick = true;
+			if (!MiddleClickPressed)
+			{
+				MiddleClickDown = true;
+			}
+			else
+			{
+				MiddleClickDown = false;
+			}
+
+			MiddleClickPressed = true;
+		}
+		else
+		{
+			MiddleClickPressed = false;
 		}
 	}
 };
