@@ -47,7 +47,7 @@ void Update()
   Gray.Draw();
   OPTION.Draw();
   arrow.Draw();
-Gray.transform.x += 0.000000000001f;
+Gray.transform.x += 0.01f;
 >>>>>>> origin/master
 	//Drawing GUIElements example:
 
