@@ -72,7 +72,7 @@ int main(int argc, char** argv)
 		}
 
 		//Sets the background color
-		//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 		//Clears the renderer's buffer
 		SDL_RenderClear(renderer);
