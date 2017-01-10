@@ -8,7 +8,7 @@
 #define Panel_Gray "data/GrayBackground.png"
 #define Black_Panel "data/CircuitPickerPanel.png"
 #define Black_Check "data/CheckboxChecked.png"
-
+#define DropB "data/DropdownBox.png"
 //Defining texture paths example:
 //#define TEX_EXAMPLE "data/imagename.png"
 #define TEX_ARROW "data/PropertiesPanel.png"
@@ -21,6 +21,7 @@ GUIElement arrow;
 GUIElement OPTION;
 GUIElement Gray;
 GUIElement Check;
+GUIElement Drop;
 
 //Function called once on startup
 //Actually make everything here
@@ -36,8 +37,9 @@ void Startup()
   Black_Box = GUIElement (0.0f, 0.0f, 500.0f, 50.0f, Black_Panel);
               //OPTION = GUIElement (200.0f, 200.0f, 50.0f, 50.0f, Options_Menu);
   OPTION = GUIElement (18.0f, 18.0f, 25.0f, 25.0f, Options_Menu);
-  Check = GUIElement ( 0.0f, 0.0f, 30.0f, 30.0f, Black_Check);
+  Check = GUIElement ( .0f, 0.0f, .0f, 30.0f, Black_Check);
   arrow = GUIElement (167.0f, 18.0f, 40.0f, 30.0f, Arrow);
+  Drop = GUIElement (73.0f, 70.0f, 80.0f, 17.0f, DropB);
 }
 
 //Function updated every frame
@@ -52,14 +54,15 @@ void Update()
   OPTION.transform.w = WindowSize.x / 35 ;
   OPTION.transform.h = WindowSize.y / 21 ;
 
-  arrow.transform.w = WindowSize.x / 17;
-  arrow.transform.h = WindowSize.y / 25;
+  //arrow.transform.w = WindowSize.x / 17;
+  //arrow.transform.h = WindowSize.y / 25;
   //arrow.transform.x = WindowSize.x + 30;
+  arrow.transform.x = WindowSize.x / 4.5 ;
+  arrow.transform.y = WindowSize.y / 30 ;
 
-//  Black_Box.transform.h = WindowSize.y - Black_Box.transform.x;
+  Drop.transform.x = WindowSize.x / 11.5f;
+  Drop.transform.y = WindowSize.y / 7.4 ;
 
-  //Gray.Draw();
-  //OPTION.Draw();
 
 //Gray.transform.x += 0.01f;
 
@@ -72,6 +75,7 @@ void Update()
   Check.Draw();
   OPTION.Draw();
   arrow.Draw();
+  Drop.Draw();
 	//Checking for clicking a GUIElement example:
 	//if (testElement.CheckHover(Mouse) && Mouse.LeftClickDown)
 	//{
