@@ -21,8 +21,8 @@ int main(int argc, char** argv)
 	printf("Creating window...\n");
    window = SDL_CreateWindow(
       windowTitle.c_str(),     //window's displayed title
-      SDL_WINDOWPOS_UNDEFINED, //x position
-      SDL_WINDOWPOS_UNDEFINED, //y position
+      SDL_WINDOWPOS_CENTERED, //x position
+      SDL_WINDOWPOS_CENTERED, //y position
       800,                     //width, in pixels
       600,                     //height of the window
       SDL_WINDOW_RESIZABLE     //Window flags
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
 
 	//Creates the program's renderer
 	printf("Creating renderer...\n");
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window, -1, 0);
 
 	//Check to make sure the window was created
    if (renderer == NULL)
@@ -63,11 +63,11 @@ int main(int argc, char** argv)
 	{
 		// event handling
 		SDL_Event e;
-		if (SDL_PollEvent(&e))
+		while (SDL_PollEvent(&e))
 		{
 			if (e.type == SDL_QUIT)
 			{
-				break;
+				CloseWindow = true;
 			}
 		}
 
