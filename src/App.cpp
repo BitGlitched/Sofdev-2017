@@ -37,7 +37,7 @@ void Startup()
   Black_Box = GUIElement (0.0f, 0.0f, 500.0f, 50.0f, Black_Panel);
               //OPTION = GUIElement (200.0f, 200.0f, 50.0f, 50.0f, Options_Menu);
   OPTION = GUIElement (18.0f, 18.0f, 25.0f, 25.0f, Options_Menu);
-  Check = GUIElement ( .0f, 0.0f, .0f, 30.0f, Black_Check);
+  Check = GUIElement ( 0.0f, 0.0f, 0.0f, 30.0f, Black_Check);
   arrow = GUIElement (167.0f, 18.0f, 40.0f, 30.0f, Arrow);
   Drop = GUIElement (73.0f, 70.0f, 80.0f, 17.0f, DropB);
 }
@@ -48,20 +48,20 @@ void Update()
 	propertiesPanel.transform.w = WindowSize.x / 5.0f; // / 5.0f;
 	propertiesPanel.transform.h = WindowSize.y;  //propertiesPanel.transform.y; //- propertiesPanel.transform.x; wth andrew. You're litterally subtracting Zero...
 
-  Black_Box.transform.w = WindowSize.x;    //  / 5.0f;
-  Black_Box.transform.h = WindowSize.y / 9.7f;
+   Black_Box.transform.w = WindowSize.x;    //  / 5.0f;
+   Black_Box.transform.h = WindowSize.y / 9.7f ;
 
-  OPTION.transform.w = WindowSize.x / 35 ;
-  OPTION.transform.h = WindowSize.y / 21 ;
+   OPTION.transform.w = 30/*WindowSize.x / 35*/ ;
+   OPTION.transform.h = 30/*WindowSize.y / 21*/ ;
 
   //arrow.transform.w = WindowSize.x / 17;
   //arrow.transform.h = WindowSize.y / 25;
   //arrow.transform.x = WindowSize.x + 30;
-  arrow.transform.x = WindowSize.x / 4.5 ;
+  arrow.transform.x = WindowSize.x / 4.5f ;
   arrow.transform.y = WindowSize.y / 30 ;
 
   Drop.transform.x = WindowSize.x / 11.5f;
-  Drop.transform.y = WindowSize.y / 7.4 ;
+  Drop.transform.y = WindowSize.y / 7.4f ;
 
 
 //Gray.transform.x += 0.01f;
@@ -70,12 +70,12 @@ void Update()
 
 	//element.Draw();
 	propertiesPanel.Draw();
-  Black_Box.Draw();
+   Black_Box.Draw();
 
-  Check.Draw();
-  OPTION.Draw();
-  arrow.Draw();
-  Drop.Draw();
+   Check.Draw();
+   OPTION.Draw();
+   arrow.Draw();
+   Drop.Draw();
 	//Checking for clicking a GUIElement example:
 	//if (testElement.CheckHover(Mouse) && Mouse.LeftClickDown)
 	//{
