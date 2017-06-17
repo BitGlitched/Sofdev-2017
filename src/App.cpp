@@ -1,6 +1,8 @@
 #include "headers/Main.h"
 #include "headers/types/GUIElement.h"
+#include "headers/Font.h"
 
+#define PROTOTYPING "data/Prototyping.png"
 #define Options_Menu "data/DropdownMenu.png"
 #define Arrow "data/ARROW.png"
 #define Dropdown "data/DropdownBackground.png"
@@ -11,9 +13,11 @@
 //Defining texture paths example:
 //#define TEX_EXAMPLE "data/imagename.png"
 #define TEX_ARROW "data/PropertiesPanel.png"
+#define TEX_IC "data/IC.png"
 
 //Creating GUIElements example:
 //GUIElement element;
+GUIElement wireToolButton;
 GUIElement propertiesPanel;
 GUIElement Black_Box;
 GUIElement arrow;
@@ -21,6 +25,10 @@ GUIElement OPTION;
 GUIElement Gray;
 GUIElement Check;
 GUIElement Drop;
+
+bool WireSelected = false;
+
+//std::vector<int> v;
 
 //Function called once on startup
 //Actually make everything here
@@ -32,6 +40,8 @@ void Startup()
 	//element = GUIElement(200.0f, 200.0f, 30.0f, 30.0f, TEX_EXAMPLE);
 	//First argument provided is the x position, second is the y position, third is the x scale/size, fourth is the y scale/size, and fifth is the texture path
 	// Y = 575 is roughly the bottom of the Interface
+
+   wireToolButton = GUIElement(
 	propertiesPanel = GUIElement(0.0f, 60.0f, 100.0f, 600.0f, TEX_ARROW);
    Black_Box = GUIElement (0.0f, 0.0f, 500.0f, 50.0f, Black_Panel);
 	//OPTION = GUIElement (200.0f, 200.0f, 50.0f, 50.0f, Options_Menu);
@@ -45,13 +55,13 @@ void Startup()
 void Update()
 {
 	propertiesPanel.transform.w = WindowSize.x / 5.0f; // / 5.0f;
-	propertiesPanel.transform.h = WindowSize.y;  //propertiesPanel.transform.y; //- propertiesPanel.transform.x; wth andrew. You're litterally subtracting Zero...
+	propertiesPanel.transform.h = WindowSize.y;
 
    Black_Box.transform.w = WindowSize.x;    //  / 5.0f;
    Black_Box.transform.h = WindowSize.y / 9.7f;
 
-   OPTION.transform.w = WindowSize.x / 35 ;
-   OPTION.transform.h = WindowSize.y / 21 ;
+   OPTION.transform.w = WindowSize.x / 35;
+   OPTION.transform.h = WindowSize.y / 21;
 
    //arrow.transform.w = WindowSize.x / 17;
    //arrow.transform.h = WindowSize.y / 25;
