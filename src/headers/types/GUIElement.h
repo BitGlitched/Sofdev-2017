@@ -1,19 +1,13 @@
 #ifndef GUIELEMENT_H
 #define GUIELEMENT_H
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <string>
-
-#include "Vector2.h"
-#include "MouseData.h"
+#include "../Main.h"
 
 class GUIElement
 {
-private:
-	Vector2 imageSize;
 public:
-	SDL_Texture* image = NULL;
+	Vector2 imageSize;
+	Texture texture;
 	SDL_Rect transform;
 
 	GUIElement(float x = 0.0f, float y = 0.0f, float w = 1.0f, float h = 1.0f, std::string ImagePath = "")
@@ -25,33 +19,31 @@ public:
 
 		if (ImagePath != "")
 		{
-			//Loads the image
-			image = IMG_LoadTexture(renderer, ImagePath.c_str());
-			int w, h;
-			SDL_QueryTexture(image, NULL, NULL, &w, &h);
-			imageSize = Vector2(w, h);
-		}
-		else
-		{
-			printf("...\n");
+			printf("Creating texture\n");
+			texture = Texture(ImagePath);
+			texture.Load();
+			printf("Created texture\n");
 		}
 	}
 
 	void ChangeImage(std::string ImagePath)
 	{
 		//gets rid of the previous image
-		SDL_DestroyTexture(image);
+		//SDL_DestroyTexture(image);
 
 		//Loads the new image
-		image = IMG_LoadTexture(renderer, ImagePath.c_str());
+		/*image = IMG_LoadTexture(renderer, ImagePath.c_str());
 		int w, h;
 		SDL_QueryTexture(image, NULL, NULL, &w, &h);
-		imageSize = Vector2(w, h);
+		imageSize = Vector2(w, h);*/
+
+		texture = Texture(ImagePath);
+		texture.Load();
 	}
 
-	void Draw()
+	void Draw(int mode = 0, Vector2 offset = Vector2(0.0f, 0.0f))
 	{
-		SDL_RenderCopy(renderer, image, NULL, &transform);
+		Draw2D(Vector2(transform.x, transform.y), Vector2(transform.w, transform.h), texture.ID, texture.mode, Vector2(1.0f, 1.0f), offset);
 	}
 
 	bool CheckHover(MouseData mouse)
