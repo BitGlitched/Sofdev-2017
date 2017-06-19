@@ -100,7 +100,7 @@ int main(int argc, char** argv)
 			}
 		}
 
-		//Sets the background color
+      //Sets the background color
 		//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -130,7 +130,7 @@ int main(int argc, char** argv)
 		//Calls the function for the application frontend
 		Update();
 
-		//SDL_RenderPresent(renderer);
+		//SDL_RenderPresent(glcontext);
 		//SDL_GL_SwapBuffers();
 		SDL_GL_SwapWindow(window);
 	}

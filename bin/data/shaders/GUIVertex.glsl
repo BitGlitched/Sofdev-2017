@@ -35,7 +35,7 @@ void main()
    gl_Position = vec4(xCoord, yCoord, 0, 1.0f);
 
    fragColor = tint;
-   TexCoord = ((texCoord * uvScale) + (uvOffset * uvScale));
+   TexCoord = ((texCoord) + (uvOffset));
 
    if (texMode == 1)
    {

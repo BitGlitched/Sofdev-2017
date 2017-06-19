@@ -10,6 +10,7 @@
 #define TEX_CHECKBOX_CHECKED "data/CheckboxChecked.png"
 #define TEX_DROPDOWN_BOX "data/DropdownBox.png"
 #define TEX_PPANEL "data/PropertiesPanel.png"
+#define TEX_GRID "data/Grid.png"
 #define TEX_IC "data/IC.png"
 
 #include "types/GUIElement.h"

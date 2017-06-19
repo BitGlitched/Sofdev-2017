@@ -30,7 +30,7 @@ int RenderText (char* str, SDL_Color color, TTF_Font* font)
 	  	}
     	else
 		{
-      	texture_format = GL_BGRA;
+      	texture_format = GL_BGRA_EXT;
 		}
 	}
 	else
@@ -41,7 +41,7 @@ int RenderText (char* str, SDL_Color color, TTF_Font* font)
 		}
 	   else
 		{
-	   	texture_format = GL_BGR;
+	   	texture_format = GL_BGR_EXT;
 		}
 	}
 

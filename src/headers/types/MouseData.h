@@ -6,8 +6,11 @@
 extern Vector2 WindowSize;
 struct MouseData
 {
+private:
+	int X, Y;
 public:
 	int x, y;
+	int velX, velY;
 	bool LeftClickPressed;
 	bool LeftClickDown;
 	bool RightClickPressed;
@@ -23,6 +26,12 @@ public:
 
 		//Updates mouse position
 		SDL_GetMouseState(&x, &y);
+		velX = X - x;
+		velY = Y - y;
+
+		X = x;
+		Y = y;
+		
 		x -= WindowSize.x * 0.5f;
 		y -= WindowSize.y * 0.5f;
 		y = -y;
@@ -47,7 +56,7 @@ public:
 		}
 
 		//Checks to see if the right mouse button is pressed
-		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT) && !RightClickPressed)
+		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT))
 		{
 			if (!RightClickPressed)
 			{
@@ -66,7 +75,7 @@ public:
 		}
 
 		//Checks to see if the middle mouse button is pressed
-		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_MIDDLE) && !MiddleClickPressed)
+		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
 		{
 			if (!MiddleClickPressed)
 			{

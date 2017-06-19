@@ -10,6 +10,7 @@ public:
 	Texture texture;
 	Vector2 transform;
 	Vector2 scale;
+	Vector2 offset = Vector2();
 
 	GUIElement(float x = 0.0f, float y = 0.0f, float w = 1.0f, float h = 1.0f, std::string ImagePath = "")
 	{
@@ -30,20 +31,12 @@ public:
 
 	void ChangeImage(std::string ImagePath)
 	{
-		//gets rid of the previous image
-		//SDL_DestroyTexture(image);
-
-		//Loads the new image
-		/*image = IMG_LoadTexture(renderer, ImagePath.c_str());
-		int w, h;
-		SDL_QueryTexture(image, NULL, NULL, &w, &h);
-		imageSize = Vector2(w, h);*/
 		texture = Texture(ImagePath);
 		texture.Load();
 		imageSize = Vector2(texture.width, texture.height);
 	}
 
-	void Draw(int mode = 0, Vector2 offset = Vector2(0.0f, 0.0f))
+	void Draw()
 	{
 		//printf("Transform: %f, %f   Scale: %f, %f\n\n", transform.x, transform.y, scale.x, scale.y);
 		Draw2D(GUIShader, Vector2(transform.x, transform.y), Vector2(scale.x, scale.y), texture.ID, texture.mode, Vector2(1.0f, 1.0f), offset);
