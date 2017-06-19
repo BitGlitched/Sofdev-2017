@@ -7,6 +7,7 @@ SDL_GLContext glcontext = NULL;
 
 bool CloseWindow = false;
 Vector2 WindowSize = Vector2();
+Vector2 Canvas = Vector2(1.0f, 1.0f);
 
 MouseData Mouse;
 
@@ -34,6 +35,8 @@ std::string ReadFile(char* path)
    return output;
 }
 
+Vector2 lastMouse;
+
 int main(int argc, char** argv)
 {
  	//Initializes SDL
@@ -49,7 +52,7 @@ int main(int argc, char** argv)
       SDL_WINDOWPOS_CENTERED, 						//y position
       1280,                   						//width, in pixels
       720,                    						//height of the window
-      SDL_WINDOW_OPENGL|SDL_WINDOW_RESIZABLE		//Window flags
+      SDL_WINDOW_OPENGL		//Window flags
 	);
 
    //Check to make sure the window was created
@@ -99,17 +102,30 @@ int main(int argc, char** argv)
 
 		//Sets the background color
 		//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		glClearColor(255, 255, 255, 1);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		//Clears the renderer's buffer
 		//SDL_RenderClear(renderer);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+      //Sets up the view of OpenGL
+      glViewport(0, 0, WindowSize.x, WindowSize.y);
+      glOrtho(-1, 1, -1, 1, -1, 1);
 
 		//Updates everything such as mouse size, window size, etc etc
 		//Updates the mouse
 		Mouse.UpdateMouse();
+
+      /*if (lastMouse.x != Mouse.x || lastMouse.y != Mouse.y)
+      {
+         printf("Mouse position: %i, %i\n", Mouse.x, Mouse.y);
+      }
+      lastMouse = Vector2(Mouse.x, Mouse.y);*/
+
 		//Gets the window size and stores it in a Vector2
-		SDL_GetWindowSize(window, (int*)&WindowSize.x, (int*)&WindowSize.y);
+      int x, y;
+		SDL_GetWindowSize(window, &x, &y);
+      WindowSize = Vector2(x, y);
 
 		//Calls the function for the application frontend
 		Update();

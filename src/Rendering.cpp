@@ -1,6 +1,7 @@
 #include "headers/Main.h"
 
-#define DEFAULT_VERTEX_SHADER "data/shaders/330Vertex.glsl"
+#define GUI_VERTEX_SHADER "data/shaders/GUIVertex.glsl"
+#define OBJ_VERTEX_SHADER "data/shaders/ObjVertex.glsl"
 #define DEFAULT_FRAGMENT_SHADER "data/shaders/330Fragment.glsl"
 
 std::string GLRendererString;
@@ -8,7 +9,8 @@ std::string GLVersionString;
 std::string GLSLVersionString;
 
 GLuint QuadVertexArray;
-Shader DefaultShader = Shader();
+Shader GUIShader = Shader();
+Shader ObjShader = Shader();
 
 //Creates a vertex array for a quad
 GLuint CreateVertexArray()
@@ -92,22 +94,22 @@ void InitOpenGL()
 	GLVersionString = (char*)glGetString(GL_VERSION);
 	GLSLVersionString = (char*)glGetString(GL_SHADING_LANGUAGE_VERSION);
 
-	renderer += GLRendererString;
-	version += GLVersionString;
-	glslVersion += GLSLVersionString;
+	renderer += GLRendererString + "\n";
+	version += GLVersionString + "\n";
+	glslVersion += GLSLVersionString + "\n";
 
 	printf(renderer.c_str());
 	printf(version.c_str());
 	printf(glslVersion.c_str());
 
 	//Creates the default shader for the game engine
-	printf("\nINFO: Creating default shader:");
-	DefaultShader = Shader((char*)DEFAULT_VERTEX_SHADER, (char*)DEFAULT_FRAGMENT_SHADER);
+	printf("\nINFO: Creating default shader:\n");
+	GUIShader = Shader((char*)GUI_VERTEX_SHADER, (char*)DEFAULT_FRAGMENT_SHADER);
 
 	//Creates the default vertex array for a quad
-	printf("INFO: Creating quad vertex array...");
+	printf("INFO: Creating quad vertex array...\n");
 	QuadVertexArray = CreateVertexArray();
-	printf("INFO: Successfully created quad vertex array!\n");
+	printf("INFO: Successfully created quad vertex array!\n\n");
 }
 
 //Conversion function between engine coordinates and OpenGL coordinates
@@ -120,24 +122,24 @@ void InitOpenGL()
 }*/
 
 //Universal drawing function to draw using a provided textureID
-void Draw2D(Vector2 position, Vector2 scale,/* Color tint,*/ int textureID, int texMode, Vector2 uvScale, Vector2 uvOffset)
+void Draw2D(Shader shader, Vector2 position, Vector2 scale,/* Color tint,*/ int textureID, int texMode, Vector2 uvScale, Vector2 uvOffset)
 {
    //Use the default shader
-   DefaultShader.Use();
+   shader.Use();
 
    //Get's the shader's uniform variable for aspect ratio
-   GLfloat Aspect = glGetUniformLocation(DefaultShader.Program, "aspect");
+   GLfloat Aspect = glGetUniformLocation(shader.Program, "aspect");
    glUniform1f(Aspect, WindowSize.x / WindowSize.y);
 
    //Get's the shader's uniform variable for position
-   GLfloat drawPosition = glGetUniformLocation(DefaultShader.Program, "position");
+   GLfloat drawPosition = glGetUniformLocation(shader.Program, "position");
    glUniform2f(drawPosition, position.x, position.y);
 
-   GLfloat drawScale = glGetUniformLocation(DefaultShader.Program, "scale");
-   glUniform2f(drawScale, scale.x, scale.y);
+   GLfloat drawScale = glGetUniformLocation(shader.Program, "scale");
+   glUniform2f(drawScale, scale.x , scale.y);
 
-   GLfloat drawPixelSize = glGetUniformLocation(DefaultShader.Program, "pixelSize");
-   GLint hasTexture = glGetUniformLocation(DefaultShader.Program, "hasTexture");
+   GLfloat imageSize = glGetUniformLocation(shader.Program, "imageSize");
+   GLint hasTexture = glGetUniformLocation(shader.Program, "hasTexture");
 
    //If we have a texture provided
    if (textureID != 0)
@@ -145,34 +147,37 @@ void Draw2D(Vector2 position, Vector2 scale,/* Color tint,*/ int textureID, int 
       //Binds the texture we give it
       glActiveTexture(GL_TEXTURE0);
       glBindTexture(GL_TEXTURE_2D, textureID);
-      glUniform1i(glGetUniformLocation(DefaultShader.Program, "Texture"), 0);
+      glUniform1i(glGetUniformLocation(shader.Program, "Texture"), 0);
       //Get's the shader's uniform variable for the dimension of the texture in pixels
       int width, height;
       glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
       glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height);
       //GLfloat pixelSize = (GLfloat)Camera.size / (1 / (float)Camera.PixelsPerUnit);
-      glUniform2f(drawPixelSize, width / scale.x, height / scale.y);
+      glUniform2f(imageSize, width, height);
       glUniform1i(hasTexture, 1);
    }
    else
    {
       //GLfloat pixelSize = (GLfloat)Camera.size / (1 / (float)Camera.PixelsPerUnit);
-      glUniform2f(drawPixelSize, scale.x, scale.y);
+      glUniform2f(imageSize, scale.x, scale.y);
       glUniform1i(hasTexture, 0);
    }
 
-   GLfloat drawUVScale = glGetUniformLocation(DefaultShader.Program, "uvScale");
+	GLfloat windowSize = glGetUniformLocation(shader.Program, "windowSize");
+	glUniform2f(windowSize, WindowSize.x, WindowSize.y);
+
+   GLfloat drawUVScale = glGetUniformLocation(shader.Program, "uvScale");
    glUniform2f(drawUVScale, uvScale.x, uvScale.y);
 
-   GLfloat drawUVOffset = glGetUniformLocation(DefaultShader.Program, "uvOffset");
+   GLfloat drawUVOffset = glGetUniformLocation(shader.Program, "uvOffset");
    glUniform2f(drawUVOffset, uvOffset.x, uvOffset.y);
 
-   GLint drawTexMode = glGetUniformLocation(DefaultShader.Program, "texMode");
+   GLint drawTexMode = glGetUniformLocation(shader.Program, "texMode");
    glUniform1i(drawTexMode, texMode);
 
    //Get's the shader's uniform variable for drawing tint
-   /*GLint drawTint = glGetUniformLocation(DefaultShader.Program, "tint");
-   glUniform4f(drawTint, tint.r, tint.g, tint.b, tint.a);*/
+   GLint drawTint = glGetUniformLocation(shader.Program, "tint");
+   glUniform4f(drawTint, 1.0f, 1.0f, 1.0f, 1.0f);
 
    //Binds the Vertex Array Object
    glBindVertexArray(QuadVertexArray);

@@ -1,6 +1,9 @@
 #ifndef MOUSEDATA_H
 #define MOUSEDATA_H
 
+#include "Vector2.h"
+
+extern Vector2 WindowSize;
 struct MouseData
 {
 public:
@@ -20,6 +23,9 @@ public:
 
 		//Updates mouse position
 		SDL_GetMouseState(&x, &y);
+		x -= WindowSize.x * 0.5f;
+		y -= WindowSize.y * 0.5f;
+		y = -y;
 
 		//Checks to see if the left mouse button is pressed
 		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))

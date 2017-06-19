@@ -21,8 +21,9 @@ void Startup()
 //Function updated every frame
 void Update()
 {
-   ScaleGUI();
+   UpdateGUI();
    DrawGUI();
+   //Draw2D(Vector2(), Vector2(1.0f, 1.0f), );
 
 	//Checking for clicking a GUIElement example:
 	//if (testElement.CheckHover(Mouse) && Mouse.LeftClickDown)

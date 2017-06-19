@@ -21,6 +21,7 @@ extern SDL_GLContext glcontext;
 
 extern bool CloseWindow;
 extern Vector2 WindowSize;
+extern Vector2 Canvas;
 extern MouseData Mouse;
 
 std::string ReadFile(char*);
@@ -28,10 +29,11 @@ void Startup();
 void Update();
 
 extern GLuint QuadVertexArray;
-extern Shader DefaultShader;
+extern Shader GUIShader;
+extern Shader ObjShader;
 
 void InitOpenGL();
-void Draw2D(Vector2, Vector2,/* Color,*/ int = 0, int = 0, Vector2 = Vector2(1.0f, 1.0f), Vector2 = Vector2(0.0f, 0.0f));
+void Draw2D(Shader, Vector2, Vector2,/* Color,*/ int = 0, int = 0, Vector2 = Vector2(1.0f, 1.0f), Vector2 = Vector2(0.0f, 0.0f));
 
 #include "GUI.h"
 #include "types/IC.h"
