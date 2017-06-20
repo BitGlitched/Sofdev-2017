@@ -5,7 +5,7 @@
 
 class IC : public GUIElement
 {
-
+   
 };
 
 #endif

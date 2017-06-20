@@ -20,9 +20,9 @@ void InitGUI()
 	//wireToolButton = GUIElement(
 	propertiesPanel = GUIElement(-522.0f, 0.0f, 1.0f, 1.0f, TEX_PPANEL);
    pickerPanel = GUIElement (0.0f, 319.0f, 1.0f, 1.0f, TEX_PICKER_PANEL);
-   dropbownBox = GUIElement (18.0f, 18.0f, 0.1f, 0.1f, TEX_DROPDOWN_BOX); //OPTION = GUIElement (200.0f, 200.0f, 50.0f, 50.0f, Options_Menu);
-   checkBoxChecked = GUIElement (100.0f, 100.0f, 0.1f, 0.1f, TEX_CHECKBOX_CHECKED);
-   arrow = GUIElement (167.0f, 18.0f, 0.1f, 0.1f, TEX_ARROW);
+   //dropbownBox = GUIElement (18.0f, 18.0f, 0.1f, 0.1f, TEX_DROPDOWN_BOX); //OPTION = GUIElement (200.0f, 200.0f, 50.0f, 50.0f, Options_Menu);
+   //checkBoxChecked = GUIElement (100.0f, 100.0f, 0.1f, 0.1f, TEX_CHECKBOX_CHECKED);
+   arrow = GUIElement (-150.0f, 319.0f, 1.0f, 1.0f, TEX_ARROW);
 	grid = GUIElement (0, 0, 160.0f, 90.0f, TEX_GRID);
 	grid.texture.mode = REPEAT;
 
@@ -54,5 +54,5 @@ void DrawGUI()
 	grid.Draw();
 	propertiesPanel.Draw();
 	pickerPanel.Draw();
-	//checkBoxChecked.Draw();
+	arrow.Draw();
 }
