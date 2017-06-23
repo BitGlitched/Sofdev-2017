@@ -18,6 +18,9 @@ GUIElement capacitor;
 GUIElement integratedCircuit;
 GUIElement currentComponent;
 GUIElement lightBulb;
+GUIElement wireBend;
+GUIElement wireStraight;
+GUIElement wireThreeWay;
 
 std::vector<GUIElement*> components;
 int elementNumber;
@@ -46,6 +49,9 @@ Texture texSwitchOpen;
 Texture texSwitchClosed;
 Texture texLight;
 Texture texBattery;
+Texture texWireBend;
+Texture texWireStraight;
+Texture texWireThreeWay;
 
 void TryAddComponent()
 {
@@ -85,17 +91,26 @@ void InitGUI()
 	texLight.Load();
 	texBattery = Texture(TEX_BATTERY);
 	texBattery.Load();
+	texWireBend = Texture(TEX_WIREBEND);
+	texWireBend.Load();
+	texWireStraight = Texture(TEX_WIRESTRAIGHT);
+	texWireStraight.Load();
+	texWireThreeWay = Texture(TEX_WIRETHREEWAY);
+	texWireThreeWay.Load();
 
 	arrow = GUIElement(-388.0f, 319.0f, 1.0f, 1.0f, TEX_ARROWLEFT);
 	forwardArrow = GUIElement(-356.0f, 319.0f, 1.0f, 1.0f, TEX_ARROWRIGHT);
 	propertiesPanel = GUIElement(-522.0f, 0.0f, 1.0f, 1.0f, TEX_PPANEL); //right edge at -404
    pickerPanel = GUIElement (0.0f, 319.0f, 1.0f, 1.0f, TEX_PICKER_PANEL);
-   battery = GUIElement (-292.0f, 319.0f, 1.0f, 1.0f, TEX_BATTERY);
-   resistor = GUIElement (-228.0f, 319.0f, 1.0f, 1.0f, TEX_RESISTOR);
-   capacitor = GUIElement (-164.0f, 319.0f, 1.0f, 1.0f, TEX_CAPACITOR);
-   integratedCircuit = GUIElement(-100.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
-   switchOpen = GUIElement(-36.0f, 319.0f, 1.0f, 1.0f, TEX_SWITCHOPEN);
-   lightBulb = GUIElement(28.0f, 319.0f, 1.0f, 1.0f, TEX_LIGHTBULB);
+   battery = GUIElement (-18.0f, 319.0f, 1.0f, 1.0f, TEX_BATTERY);
+   resistor = GUIElement (56.0f, 319.0f, 1.0f, 1.0f, TEX_RESISTOR);
+   capacitor = GUIElement (130.0f, 319.0f, 1.0f, 1.0f, TEX_CAPACITOR);
+   integratedCircuit = GUIElement(204.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
+   switchOpen = GUIElement(278.0f, 319.0f, 1.0f, 1.0f, TEX_SWITCHOPEN);
+   lightBulb = GUIElement(352.0f, 319.0f, 1.0f, 1.0f, TEX_LIGHTBULB);
+   wireBend = GUIElement(-292.0f, 319.0f, 1.0f, 1.0f, TEX_WIREBEND);
+   wireStraight = GUIElement(-218.0f, 319.0f, 1.0f, 1.0f, TEX_WIRESTRAIGHT);
+   wireThreeWay = GUIElement(-144.0f, 319.0f, 1.0f, 1.0f, TEX_WIRETHREEWAY);
    currentComponent = GUIElement();
 	grid = GUIElement (0, 0, 160.0f, 90.0f, TEX_GRID);
 	grid.texture.mode = REPEAT;
@@ -138,6 +153,18 @@ void UpdateGUI()
 		if (battery.CheckHover())
 		{
 			toolSelected = BATTERY;
+		}
+		else if (wireStraight.CheckHover())
+		{
+			toolSelected = WIRESTRAIGHT;
+		}
+		else if (wireBend.CheckHover())
+		{
+			toolSelected = WIREBEND;
+		}
+		else if (wireThreeWay.CheckHover())
+		{
+			toolSelected = WIRETHREEWAY;
 		}
 		else if (switchOpen.CheckHover())
 		{
@@ -218,6 +245,18 @@ void UpdateGUI()
 			{
 				currentComponent.ChangeImage(texLight);
 			}
+			else if (toolSelected == WIRESTRAIGHT)
+			{
+				currentComponent.ChangeImage(texWireStraight);
+			}
+			else if (toolSelected == WIREBEND)
+			{
+				currentComponent.ChangeImage(texWireBend);
+			}
+			else if (toolSelected == WIRETHREEWAY)
+			{
+				currentComponent.ChangeImage(texWireThreeWay);
+			}
 
 			if (Mouse.LeftClickDown)
 			{
@@ -246,4 +285,7 @@ void DrawGUI()
 	switchOpen.Draw();
 	lightBulb.Draw();
 	integratedCircuit.Draw();
+	wireStraight.Draw();
+	wireBend.Draw();
+	wireThreeWay.Draw();
 }

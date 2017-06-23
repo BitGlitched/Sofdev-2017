@@ -19,12 +19,18 @@
 #define TEX_SWITCHCLOSED "data/Switch-Closed.png"
 #define TEX_BATTERY "data/Battery.png"
 #define TEX_LIGHTBULB "data/Light Bulb.png"
+#define TEX_WIRESTRAIGHT "data/Wire.png"
+#define TEX_WIREBEND "data/Wire2way.png"
+#define TEX_WIRETHREEWAY "data/Wire3way.png"
 
 #include "types/GUIElement.h"
 
 enum ToolType
 {
    SELECTED,
+   WIRESTRAIGHT,
+   WIREBEND,
+   WIRETHREEWAY,
     SWITCHOPEN,
     SWITCHCLOSED,
     BATTERY,
