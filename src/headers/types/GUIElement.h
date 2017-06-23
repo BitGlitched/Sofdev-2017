@@ -13,6 +13,7 @@ public:
 	Vector2 offset = Vector2();
 	Color color = Color();
 	int rotation = 1;
+	int ID;
 
 	GUIElement(float x = 0.0f, float y = 0.0f, float w = 1.0f, float h = 1.0f, std::string ImagePath = "")
 	{
@@ -40,6 +41,27 @@ public:
 	void Draw()
 	{
 		//printf("Transform: %f, %f   Scale: %f, %f\n\n", transform.x, transform.y, scale.x, scale.y);
+		if (rotation == 1)
+		{
+			scale.x = 1.0f;
+			scale.y = 1.0f;
+		}
+		else if (rotation == 2)
+		{
+			scale.x = -1.0f;
+			scale.y = 1.0f;
+		}
+		else if (rotation == 3)
+		{
+			scale.x = -1.0f;
+			scale.y = -1.0f;
+		}
+		else if (rotation == 4)
+		{
+			scale.x = 1.0f;
+			scale.y = -1.0f;
+		}
+
 		Draw2D(GUIShader, Vector2(transform.x, transform.y), Vector2(scale.x, scale.y), color, texture.ID, texture.mode, Vector2(1.0f, 1.0f), offset);
 	}
 
