@@ -5,24 +5,22 @@
 
 enum Direction
 {
-   LEFT,
-   RIGHT,
-   UP,
-   DOWN
+   HORIZONTAL,
+   VERTICAL
 };
 
 class Wire : public GUIElement
 {
 public:
    float thickness;
+   float distance;
    Vector2 transform;
-   Vector2 endTransform;
    Direction direction;
 
-   Wire(Vector2 startPosition = Vector2(), Vector2 endPosition = Vector2(), float thick = 4, Color clr = Color(1.0f, 1.0f, 1.0f, 1.0f), Direction dir = LEFT)
+   Wire(Vector2 startPosition = Vector2(), float dist = 1.0f, float thick = 4, Color clr = Color(1.0f, 1.0f, 1.0f, 1.0f), Direction dir = VERTICAL)
    {
       transform = startPosition;
-      endTransform = endPosition;
+      distance = dist;
       thickness = thick;
       color = clr;
       direction = dir;
@@ -42,7 +40,20 @@ public:
 
    void Draw()
    {
-      DrawLine(transform, endTransform, thickness, color);
+      Vector2 actualEnd;
+
+      if (direction == HORIZONTAL)
+      {
+         actualEnd.x = transform.x + distance;
+         actualEnd.y = transform.y;
+      }
+      else
+      {
+         actualEnd.x = transform.x;
+         actualEnd.y = transform.y + distance;
+      }
+
+      DrawLine(transform, actualEnd, thickness, color);
    }
 };
 

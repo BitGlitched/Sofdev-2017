@@ -198,7 +198,12 @@ void DrawLine(Vector2 start, Vector2 end, float width, Color color)
 	glLineWidth(width);
 	glColor4f(color.r, color.g, color.b, color.a);
 	glBegin(GL_LINES);
-	glVertex2f(start.x + 9.375f, start.y - 20.0f);
-	glVertex2f(end.x + 9.375f, end.y - 20.0f);
+
+	glVertex2f(((start.x / (WindowSize.x / 2.0f)) * 200.0f), (start.y / (WindowSize.y / 2.0f) * 112.5f));
+
+	glVertex2f(((end.x / (WindowSize.x / 2.0f)) * 200.0f), (end.y / (WindowSize.y / 2.0f) * 112.5f));
+
+	//printf("Pos: %f\n", scale);
+
 	glEnd();
 }
