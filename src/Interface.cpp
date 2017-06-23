@@ -30,6 +30,13 @@ void InitGUI()
 	tempText = RenderText((char*)"Test", {0, 0, 0, 0}, font);
 }
 
+void MoveView()
+{
+	grid.offset.x += (float)Mouse.velX * 0.00075f;
+	grid.offset.y += (float)Mouse.velY * 0.00075f;
+	printf("Offset: %f, %f\n", grid.offset.x, grid.offset.y);
+}
+
 void UpdateGUI()
 {
 	if (Mouse.MiddleClickPressed)
@@ -39,9 +46,7 @@ void UpdateGUI()
 			shiftViewStart = Vector2(Mouse.x, Mouse.y);
 		}
 
-		grid.offset.x += (float)Mouse.velX * 0.00075f;
-		grid.offset.y += (float)Mouse.velY * 0.00075f;
-		printf("Offset: %f, %f\n", grid.offset.x, grid.offset.y);
+		MoveView();
 	}
 
 	Draw2D(GUIShader, Vector2(), Vector2(1, 1), tempText);
