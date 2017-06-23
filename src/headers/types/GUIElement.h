@@ -41,7 +41,7 @@ public:
 	void Draw()
 	{
 		//printf("Transform: %f, %f   Scale: %f, %f\n\n", transform.x, transform.y, scale.x, scale.y);
-		if (rotation == 1)
+		/*if (rotation == 1)
 		{
 			scale.x = 1.0f;
 			scale.y = 1.0f;
@@ -60,7 +60,7 @@ public:
 		{
 			scale.x = 1.0f;
 			scale.y = -1.0f;
-		}
+		}*/
 
 		Draw2D(GUIShader, Vector2(transform.x, transform.y), Vector2(scale.x, scale.y), color, texture.ID, texture.mode, Vector2(1.0f, 1.0f), offset);
 	}
