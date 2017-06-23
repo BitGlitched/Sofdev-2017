@@ -22,6 +22,7 @@
 #define TEX_WIRESTRAIGHT "data/Wire.png"
 #define TEX_WIREBEND "data/Wire2way.png"
 #define TEX_WIRETHREEWAY "data/Wire3way.png"
+#define TEX_HIGHLIGHT "data/Border.png"
 
 #include "types/GUIElement.h"
 
@@ -40,6 +41,10 @@ enum ToolType
     LIGHTBULB,
     NONE
 };
+
+extern Texture texWireBend;
+extern Texture texWireStraight;
+extern Texture texWireThreeWay;
 
 void InitGUI();
 void UpdateGUI();
