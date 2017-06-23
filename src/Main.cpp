@@ -125,7 +125,7 @@ int main(int argc, char** argv)
          }
 
 
-        if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_R)
+        if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_r)
    		{
    			if (!ButtonRPressed)
    			{
@@ -144,15 +144,15 @@ int main(int argc, char** argv)
          }
 
       if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_DELETE)
-       {
-          if (!ButtonDelPressed)
-          {
-             ButtonDelDown = true;
-          }
-          else
-          {
-             ButtonDelDown = false;
-          }
+      {
+         if (!ButtonDelPressed)
+         {
+            ButtonDelDown = true;
+         }
+         else
+         {
+            ButtonDelDown = false;
+         }
 
           ButtonDelPressed = true;
        }
