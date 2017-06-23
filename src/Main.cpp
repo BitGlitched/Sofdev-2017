@@ -108,16 +108,14 @@ int main(int argc, char** argv)
 				CloseWindow = true;
 			}
 
+         ButtonEscDown = false;
+
    		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)
    		{
    			if (!ButtonEscPressed)
    			{
    				ButtonEscDown = true;
-   			}
-   			else
-   			{
-   				ButtonEscDown = false;
-   			}
+            }
 
             ButtonEscPressed = true;
    		}
@@ -126,16 +124,13 @@ int main(int argc, char** argv)
             ButtonEscPressed = false;
          }
 
+         ButtonRDown = false;
 
         if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_r)
    		{
    			if (!ButtonRPressed)
    			{
    				ButtonRDown = true;
-   			}
-   			else
-   			{
-   				ButtonRDown = false;
    			}
 
             ButtonRPressed = true;
@@ -145,15 +140,13 @@ int main(int argc, char** argv)
             ButtonRPressed = false;
          }
 
+         ButtonSDown = false;
+
          if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_s)
     		{
     			if (!ButtonSPressed)
     			{
     				ButtonSDown = true;
-    			}
-    			else
-    			{
-    				ButtonSDown = false;
     			}
 
              ButtonSPressed = true;
@@ -163,15 +156,13 @@ int main(int argc, char** argv)
              ButtonSPressed = false;
           }
 
+          ButtonDelDown = false;
+
       if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_DELETE)
       {
          if (!ButtonDelPressed)
          {
             ButtonDelDown = true;
-         }
-         else
-         {
-            ButtonDelDown = false;
          }
 
           ButtonDelPressed = true;
