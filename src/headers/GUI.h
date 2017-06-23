@@ -13,13 +13,20 @@
 #define TEX_PPANEL "data/PropertiesPanel.png"
 #define TEX_GRID "data/Grid.png"
 #define TEX_IC "data/IC-1.png"
+#define TEX_RESISTOR "data/Resistor.png"
+#define TEX_CAPACITOR "data/Capacitor.png"
+#define TEX_SWITCHOPEN "data/Switch-Open.png"
+#define TEX_SWITCHCLOSED "data/Switch-Closed.png"
+#define TEX_BATTERY "data/Battery.png"
+#define TEX_LIGHTBULB "data/Light Bulb.png"
 
 #include "types/GUIElement.h"
 
 enum ToolType
 {
    SELECTED,
-    SWITCHB,
+    SWITCHOPEN,
+    SWITCHCLOSED,
     BATTERY,
     RESISTOR,
     CAPACITOR,

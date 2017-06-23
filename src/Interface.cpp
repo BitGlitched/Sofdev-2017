@@ -11,7 +11,8 @@ GUIElement grayBackground;
 GUIElement checkBoxChecked;
 GUIElement grid;
 GUIElement battery;
-GUIElement switchB;
+GUIElement switchOpen;
+GUIElement switchClosed;
 GUIElement resistor;
 GUIElement capacitor;
 GUIElement integratedCircuit;
@@ -41,8 +42,10 @@ Texture texArrowRight;
 Texture texIC;
 Texture texResistor;
 Texture texCapacitor;
-Texture texSwitch;
+Texture texSwitchOpen;
+Texture texSwitchClosed;
 Texture texLight;
+Texture texBattery;
 
 void TryAddComponent()
 {
@@ -70,25 +73,29 @@ void InitGUI()
 	texArrowRight.Load();
 	texIC = Texture(TEX_IC);
 	texIC.Load();
-	texResistor = Texture();
+	texResistor = Texture(TEX_RESISTOR);
 	texResistor.Load();
-	texCapacitor = Texture();
+	texCapacitor = Texture(TEX_CAPACITOR);
 	texCapacitor.Load();
-	texSwitch = Texture();
-	texSwitch.Load();
-	texLight = Texture();
+	texSwitchOpen = Texture(TEX_SWITCHOPEN);
+	texSwitchOpen.Load();
+	texSwitchClosed = Texture(TEX_SWITCHCLOSED);
+	texSwitchClosed.Load();
+	texLight = Texture(TEX_LIGHTBULB);
 	texLight.Load();
+	texBattery = Texture(TEX_BATTERY);
+	texBattery.Load();
 
 	arrow = GUIElement(-388.0f, 319.0f, 1.0f, 1.0f, TEX_ARROWLEFT);
 	forwardArrow = GUIElement(-356.0f, 319.0f, 1.0f, 1.0f, TEX_ARROWRIGHT);
 	propertiesPanel = GUIElement(-522.0f, 0.0f, 1.0f, 1.0f, TEX_PPANEL); //right edge at -404
    pickerPanel = GUIElement (0.0f, 319.0f, 1.0f, 1.0f, TEX_PICKER_PANEL);
-   battery = GUIElement (-292.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
-   resistor = GUIElement (-228.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
-   capacitor = GUIElement (-164.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
+   battery = GUIElement (-292.0f, 319.0f, 1.0f, 1.0f, TEX_BATTERY);
+   resistor = GUIElement (-228.0f, 319.0f, 1.0f, 1.0f, TEX_RESISTOR);
+   capacitor = GUIElement (-164.0f, 319.0f, 1.0f, 1.0f, TEX_CAPACITOR);
    integratedCircuit = GUIElement(-100.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
-   switchB = GUIElement(-36.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
-   lightBulb = GUIElement(28.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
+   switchOpen = GUIElement(-36.0f, 319.0f, 1.0f, 1.0f, TEX_SWITCHOPEN);
+   lightBulb = GUIElement(28.0f, 319.0f, 1.0f, 1.0f, TEX_LIGHTBULB);
    currentComponent = GUIElement();
 	grid = GUIElement (0, 0, 160.0f, 90.0f, TEX_GRID);
 	grid.texture.mode = REPEAT;
@@ -132,9 +139,9 @@ void UpdateGUI()
 		{
 			toolSelected = BATTERY;
 		}
-		else if (switchB.CheckHover())
+		else if (switchOpen.CheckHover())
 		{
-			toolSelected = SWITCHB;
+			toolSelected = SWITCHOPEN;
 		}
 		else if (resistor.CheckHover())
 		{
@@ -189,10 +196,28 @@ void UpdateGUI()
 			currentComponent.transform.x = gridLockX;
 			currentComponent.transform.y = gridLockY;
 
-			/*if (toolSelected == IC)
-			{*/
+			if (toolSelected == IC)
+			{
 				currentComponent.ChangeImage(texIC);
-			//}
+			}
+			else if (toolSelected == SWITCHOPEN)
+			{
+				currentComponent.ChangeImage(texSwitchOpen);
+			}
+			else if (toolSelected == BATTERY)
+			{
+				currentComponent.ChangeImage(texBattery);
+			}else if (toolSelected == RESISTOR)
+			{
+				currentComponent.ChangeImage(texResistor);
+			}else if (toolSelected == CAPACITOR)
+			{
+				currentComponent.ChangeImage(texCapacitor);
+			}
+			else if (toolSelected == LIGHTBULB)
+			{
+				currentComponent.ChangeImage(texLight);
+			}
 
 			if (Mouse.LeftClickDown)
 			{
@@ -218,7 +243,7 @@ void DrawGUI()
 	resistor.Draw();
 	capacitor.Draw();
 	forwardArrow.Draw();
-	switchB.Draw();
+	switchOpen.Draw();
 	lightBulb.Draw();
 	integratedCircuit.Draw();
 }
