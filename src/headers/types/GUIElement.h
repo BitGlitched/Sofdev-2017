@@ -12,6 +12,7 @@ public:
 	Vector2 scale;
 	Vector2 offset = Vector2();
 	Color color = Color();
+	int rotation = 1;
 
 	GUIElement(float x = 0.0f, float y = 0.0f, float w = 1.0f, float h = 1.0f, std::string ImagePath = "")
 	{

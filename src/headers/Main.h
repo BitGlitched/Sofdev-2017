@@ -38,9 +38,21 @@ void InitOpenGL();
 void Draw2D(Shader, Vector2, Vector2, Color = Color(), int = 0, int = 0, Vector2 = Vector2(1.0f, 1.0f), Vector2 = Vector2(0.0f, 0.0f));
 void DrawLine(Vector2, Vector2, float, Color);
 
+enum CompID
+{
+   COMPBATTERY,
+   COMPSWITCH,
+   COMPWIRE,
+   COMPWIRE90,
+   COMPRESISTOR,
+   COMPIC,
+   COMPLIGHT
+};
 
 #include "GUI.h"
 #include "types/IC.h"
 #include "types/Wire.hpp"
+
+extern std::vector<GUIElement*> components;
 
 #endif

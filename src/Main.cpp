@@ -17,6 +17,8 @@ bool ButtonDelDown;
 bool ButtonDelPressed;
 bool ButtonRPressed;
 bool ButtonRDown;
+bool ButtonSPressed;
+bool ButtonSDown;
 
 //Function to read a file provided
 std::string ReadFile(char* path)
@@ -142,6 +144,24 @@ int main(int argc, char** argv)
          {
             ButtonRPressed = false;
          }
+
+         if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_s)
+    		{
+    			if (!ButtonSPressed)
+    			{
+    				ButtonSDown = true;
+    			}
+    			else
+    			{
+    				ButtonSDown = false;
+    			}
+
+             ButtonSPressed = true;
+    		}
+          else
+          {
+             ButtonSPressed = false;
+          }
 
       if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_DELETE)
       {
