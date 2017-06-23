@@ -1,4 +1,4 @@
-BACKEND := src/Main.cpp src/font.cpp src/Rendering.cpp src/headers/types/Shader.cpp src/Interface.cpp src/headers/types/Texture.cpp
+BACKEND := src/Main.cpp src/font.cpp src/Rendering.cpp src/headers/types/Shader.cpp src/Interface.cpp src/headers/types/Texture.cpp src/headers/types/Color.cpp
 
 FRONTEND := src/App.cpp
 

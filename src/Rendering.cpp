@@ -122,7 +122,7 @@ void InitOpenGL()
 }*/
 
 //Universal drawing function to draw using a provided textureID
-void Draw2D(Shader shader, Vector2 position, Vector2 scale,/* Color tint,*/ int textureID, int texMode, Vector2 uvScale, Vector2 uvOffset)
+void Draw2D(Shader shader, Vector2 position, Vector2 scale, Color tint, int textureID, int texMode, Vector2 uvScale, Vector2 uvOffset)
 {
    //Use the default shader
    shader.Use();
@@ -175,9 +175,9 @@ void Draw2D(Shader shader, Vector2 position, Vector2 scale,/* Color tint,*/ int 
    GLint drawTexMode = glGetUniformLocation(shader.Program, "texMode");
    glUniform1i(drawTexMode, texMode);
 
-   //Get's the shader's uniform variable for drawing tint
-   GLint drawTint = glGetUniformLocation(shader.Program, "tint");
-   glUniform4f(drawTint, 1.0f, 1.0f, 1.0f, 1.0f);
+	//Get's the shader's uniform variable for drawing tint
+	GLint drawTint = glGetUniformLocation(shader.Program, "tint");
+	glUniform4f(drawTint, tint.r, tint.g, tint.b, tint.a);
 
    //Binds the Vertex Array Object
    glBindVertexArray(QuadVertexArray);
@@ -187,4 +187,18 @@ void Draw2D(Shader shader, Vector2 position, Vector2 scale,/* Color tint,*/ int 
 
    glBindVertexArray(0);
    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void DrawLine(Vector2 start, Vector2 end, float width, Color color)
+{
+	//2.5 top
+	//42.5 bottom
+	//-30.75 left side
+	//49.5 right side
+	glLineWidth(width);
+	glColor4f(color.r, color.g, color.b, color.a);
+	glBegin(GL_LINES);
+	glVertex2f(start.x + 9.375f, start.y - 20.0f);
+	glVertex2f(end.x + 9.375f, end.y - 20.0f);
+	glEnd();
 }

@@ -11,6 +11,7 @@ public:
 	Vector2 transform;
 	Vector2 scale;
 	Vector2 offset = Vector2();
+	Color color = Color();
 
 	GUIElement(float x = 0.0f, float y = 0.0f, float w = 1.0f, float h = 1.0f, std::string ImagePath = "")
 	{
@@ -39,7 +40,7 @@ public:
 	void Draw()
 	{
 		//printf("Transform: %f, %f   Scale: %f, %f\n\n", transform.x, transform.y, scale.x, scale.y);
-		Draw2D(GUIShader, Vector2(transform.x, transform.y), Vector2(scale.x, scale.y), texture.ID, texture.mode, Vector2(1.0f, 1.0f), offset);
+		Draw2D(GUIShader, Vector2(transform.x, transform.y), Vector2(scale.x, scale.y), color, texture.ID, texture.mode, Vector2(1.0f, 1.0f), offset);
 	}
 
 	bool CheckHover()
