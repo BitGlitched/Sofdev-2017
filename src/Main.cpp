@@ -13,6 +13,8 @@ MouseData Mouse;
 
 bool ButtonEscDown;
 bool ButtonEscPressed;
+bool ButtonDelDown;
+bool ButtonDelPressed;
 
 //Function to read a file provided
 std::string ReadFile(char* path)
@@ -118,6 +120,25 @@ int main(int argc, char** argv)
          else
          {
             ButtonEscPressed = false;
+         }
+		
+
+        if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_DELETE)
+   		{
+   			if (!ButtonDelPressed)
+   			{
+   				ButtonDelDown = true;
+   			}
+   			else
+   			{
+   				ButtonDelDown = false;
+   			}
+
+            ButtonDelPressed = true;
+   		}
+         else
+         {
+            ButtonDelPressed = false;
          }
 		}
 

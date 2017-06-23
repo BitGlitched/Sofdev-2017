@@ -19,11 +19,12 @@
 enum ToolType
 {
    SELECTED,
-    WIRE,
+    SWITCHB,
     BATTERY,
     RESISTOR,
     CAPACITOR,
     IC,
+    LIGHTBULB,
     NONE
 };
 

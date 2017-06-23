@@ -5,6 +5,8 @@
 
 extern bool ButtonEscDown;
 extern bool ButtonEscPressed;
+extern bool ButtonDelDown;
+extern bool ButtonDelPressed;
 
 extern Vector2 WindowSize;
 struct MouseData

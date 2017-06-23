@@ -11,14 +11,15 @@ GUIElement grayBackground;
 GUIElement checkBoxChecked;
 GUIElement grid;
 GUIElement battery;
-GUIElement wire;
+GUIElement switchB;
 GUIElement resistor;
 GUIElement capacitor;
 GUIElement integratedCircuit;
 GUIElement currentComponent;
-GUIElement temp;
+GUIElement lightBulb;
 
 std::vector<GUIElement*> components;
+int elementNumber;
 
 GUIElement* selected = NULL;
 
@@ -38,6 +39,10 @@ int componentOffsetY;
 Texture texArrowLeft;
 Texture texArrowRight;
 Texture texIC;
+Texture texResistor;
+Texture texCapacitor;
+Texture texSwitch;
+Texture texLight;
 
 void TryAddComponent()
 {
@@ -65,6 +70,14 @@ void InitGUI()
 	texArrowRight.Load();
 	texIC = Texture(TEX_IC);
 	texIC.Load();
+	texResistor = Texture();
+	texResistor.Load();
+	texCapacitor = Texture();
+	texCapacitor.Load();
+	texSwitch = Texture();
+	texSwitch.Load();
+	texLight = Texture();
+	texLight.Load();
 
 	arrow = GUIElement(-388.0f, 319.0f, 1.0f, 1.0f, TEX_ARROWLEFT);
 	forwardArrow = GUIElement(-356.0f, 319.0f, 1.0f, 1.0f, TEX_ARROWRIGHT);
@@ -74,9 +87,9 @@ void InitGUI()
    resistor = GUIElement (-228.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
    capacitor = GUIElement (-164.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
    integratedCircuit = GUIElement(-100.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
-   wire = GUIElement(-36.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
+   switchB = GUIElement(-36.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
+   lightBulb = GUIElement(28.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
    currentComponent = GUIElement();
-   temp = GUIElement (0, 0, 0.10f, 0.10f, TEX_IC);
 	grid = GUIElement (0, 0, 160.0f, 90.0f, TEX_GRID);
 	grid.texture.mode = REPEAT;
 
@@ -119,9 +132,9 @@ void UpdateGUI()
 		{
 			toolSelected = BATTERY;
 		}
-		else if (wire.CheckHover())
+		else if (switchB.CheckHover())
 		{
-			toolSelected = WIRE;
+			toolSelected = SWITCHB;
 		}
 		else if (resistor.CheckHover())
 		{
@@ -135,7 +148,11 @@ void UpdateGUI()
 		{
 			toolSelected = IC;
 		}
-		else
+		else if (lightBulb.CheckHover())
+		{
+			toolSelected = LIGHTBULB;
+		}
+		else if (toolSelected == NONE)
 		{
 			for (int i = 0; i < components.size(); i++)
 			{
@@ -143,6 +160,7 @@ void UpdateGUI()
 				{
 					selected = components.at(i);
 					toolSelected = SELECTED;
+					elementNumber = i;
 					printf("Set selected\n");
 				}
 			}
@@ -153,6 +171,12 @@ void UpdateGUI()
 	{
 		toolSelected = NONE;
 		printf("Removed tool\n");
+	}
+
+	if (toolSelected == SELECTED && toolSelected != NONE && ButtonDelPressed && selected != NULL)
+	{
+		components.erase (components.begin() + elementNumber);
+		toolSelected = NONE;
 	}
 
 	if (toolSelected != NONE && toolSelected != SELECTED)
@@ -194,7 +218,7 @@ void DrawGUI()
 	resistor.Draw();
 	capacitor.Draw();
 	forwardArrow.Draw();
-	wire.Draw();
+	switchB.Draw();
+	lightBulb.Draw();
 	integratedCircuit.Draw();
-	temp.Draw();
 }
