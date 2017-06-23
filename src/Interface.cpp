@@ -20,6 +20,8 @@ GUIElement temp;
 
 std::vector<GUIElement*> components;
 
+GUIElement* selected = NULL;
+
 ToolType toolSelected = NONE;
 int gridLockX;
 int gridLockY;
@@ -117,30 +119,43 @@ void UpdateGUI()
 		{
 			toolSelected = BATTERY;
 		}
-		if (wire.CheckHover())
+		else if (wire.CheckHover())
 		{
 			toolSelected = WIRE;
 		}
-		if (resistor.CheckHover())
+		else if (resistor.CheckHover())
 		{
 			toolSelected = RESISTOR;
 		}
-		if (capacitor.CheckHover())
+		else if (capacitor.CheckHover())
 		{
 			toolSelected = CAPACITOR;
 		}
-		if (integratedCircuit.CheckHover())
+		else if (integratedCircuit.CheckHover())
 		{
 			toolSelected = IC;
 		}
+		else
+		{
+			for (int i = 0; i < components.size(); i++)
+			{
+				if (components.at(i)->CheckHover())
+				{
+					selected = components.at(i);
+					toolSelected = SELECTED;
+					printf("Set selected\n");
+				}
+			}
+		}
 	}
 
-	if (ButtonEscDown)
+	if (ButtonEscPressed)
 	{
 		toolSelected = NONE;
+		printf("Removed tool\n");
 	}
 
-	if (toolSelected != NONE)
+	if (toolSelected != NONE && toolSelected != SELECTED)
 	{
 		if(!pickerHover && !propertiesHover)
 		{

@@ -18,6 +18,7 @@
 
 enum ToolType
 {
+   SELECTED,
     WIRE,
     BATTERY,
     RESISTOR,
