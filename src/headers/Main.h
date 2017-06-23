@@ -13,6 +13,7 @@
 #include "types/MouseData.h"
 #include "types/Texture.hpp"
 #include "types/Shader.hpp"
+#include "types/Color.hpp"
 #include "Font.h"
 
 extern SDL_Window* window;
@@ -33,9 +34,12 @@ extern Shader GUIShader;
 extern Shader ObjShader;
 
 void InitOpenGL();
-void Draw2D(Shader, Vector2, Vector2,/* Color,*/ int = 0, int = 0, Vector2 = Vector2(1.0f, 1.0f), Vector2 = Vector2(0.0f, 0.0f));
+void Draw2D(Shader, Vector2, Vector2, Color = Color(), int = 0, int = 0, Vector2 = Vector2(1.0f, 1.0f), Vector2 = Vector2(0.0f, 0.0f));
+void DrawLine(Vector2, Vector2, float, Color);
+
 
 #include "GUI.h"
 #include "types/IC.h"
+#include "types/Wire.hpp"
 
 #endif

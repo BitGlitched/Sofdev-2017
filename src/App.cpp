@@ -1,7 +1,7 @@
 #include "headers/Main.h"
 #include "headers/GUI.h"
 
-bool WireSelected = false;
+Wire test;
 
 //std::vector<int> v;
 
@@ -16,6 +16,7 @@ void Startup()
 	//First argument provided is the x position, second is the y position, third is the x scale/size, fourth is the y scale/size, and fifth is the texture path
 	// Y = 575 is roughly the bottom of the Interface
    InitGUI();
+   test = Wire(Vector2(49.5f, 0.0f), Vector2(0.0f, 0.0f));
 }
 
 //Function updated every frame
@@ -23,6 +24,7 @@ void Update()
 {
    UpdateGUI();
    DrawGUI();
+   test.Draw();
    //Draw2D(Vector2(), Vector2(1.0f, 1.0f), );
 
 	//Checking for clicking a GUIElement example:
