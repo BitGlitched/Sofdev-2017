@@ -30,10 +30,9 @@ public:
 		}
 	}
 
-	void ChangeImage(std::string ImagePath)
+	void ChangeImage(Texture tex)
 	{
-		texture = Texture(ImagePath);
-		texture.Load();
+		texture = tex;
 		imageSize = Vector2(texture.width, texture.height);
 	}
 

@@ -18,6 +18,8 @@ GUIElement integratedCircuit;
 GUIElement currentComponent;
 GUIElement temp;
 
+std::vector<GUIElement*> components;
+
 ToolType toolSelected = NONE;
 int gridLockX;
 int gridLockY;
@@ -31,15 +33,41 @@ Vector2 shiftViewOffset;
 int componentOffsetX;
 int componentOffsetY;
 
+Texture texArrowLeft;
+Texture texArrowRight;
+Texture texIC;
+
+void TryAddComponent()
+{
+	for (int i = 0; i < components.size(); i++)
+	{
+		GUIElement* comp = components.at(i);
+
+		if (currentComponent.transform.x + 32.0f > comp->transform.x - 32.0f && currentComponent.transform.x - 32.0f < comp->transform.x + 32.0f &&
+			currentComponent.transform.y + 32.0f > comp->transform.y - 32.0f && currentComponent.transform.y - 32.0f < comp->transform.y + 32.0f)
+		{
+			printf("Failed to place\n");
+			return;
+		}
+	}
+
+	//if (toolSelected == )
+	components.push_back(new GUIElement(currentComponent));
+}
+
 void InitGUI()
 {
+	texArrowLeft = Texture(TEX_ARROWLEFT);
+	texArrowLeft.Load();
+	texArrowRight = Texture(TEX_ARROWRIGHT);
+	texArrowRight.Load();
+	texIC = Texture(TEX_IC);
+	texIC.Load();
+
 	arrow = GUIElement(-388.0f, 319.0f, 1.0f, 1.0f, TEX_ARROWLEFT);
 	forwardArrow = GUIElement(-356.0f, 319.0f, 1.0f, 1.0f, TEX_ARROWRIGHT);
-	//wireToolButton = GUIElement(
 	propertiesPanel = GUIElement(-522.0f, 0.0f, 1.0f, 1.0f, TEX_PPANEL); //right edge at -404
    pickerPanel = GUIElement (0.0f, 319.0f, 1.0f, 1.0f, TEX_PICKER_PANEL);
-   //dropbownBox = GUIElement (18.0f, 18.0f, 0.1f, 0.1f, TEX_DROPDOWN_BOX); //OPTION = GUIElement (200.0f, 200.0f, 50.0f, 50.0f, Options_Menu);
-   //checkBoxChecked = GUIElement (100.0f, 100.0f, 0.1f, 0.1f, TEX_CHECKBOX_CHECKED);
    battery = GUIElement (-292.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
    resistor = GUIElement (-228.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
    capacitor = GUIElement (-164.0f, 319.0f, 1.0f, 1.0f, TEX_IC);
@@ -107,16 +135,30 @@ void UpdateGUI()
 		}
 	}
 
+	if (ButtonEscDown)
+	{
+		toolSelected = NONE;
+	}
+
 	if (toolSelected != NONE)
 	{
 		if(!pickerHover && !propertiesHover)
 		{
-			currentComponent.ChangeImage(TEX_IC);
 			currentComponent.Draw();
 			gridLockX = Mouse.x - (Mouse.x % 16);//(shiftViewOffset.x - componentOffsetX);
 			gridLockY = Mouse.y - (Mouse.y % 16);//(shiftViewOffset.y - componentOffsetY);
 			currentComponent.transform.x = gridLockX;
 			currentComponent.transform.y = gridLockY;
+
+			/*if (toolSelected == IC)
+			{*/
+				currentComponent.ChangeImage(texIC);
+			//}
+
+			if (Mouse.LeftClickDown)
+			{
+				TryAddComponent();
+			}
 		}
 	}
 }
@@ -124,6 +166,12 @@ void UpdateGUI()
 void DrawGUI()
 {
 	grid.Draw();
+
+	for (GUIElement* i : components)
+	{
+		i->Draw();
+	}
+
 	propertiesPanel.Draw();
 	pickerPanel.Draw();
 	arrow.Draw();
