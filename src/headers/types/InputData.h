@@ -3,6 +3,9 @@
 
 #include "Vector2.h"
 
+extern bool ButtonEscDown;
+extern bool ButtonEscPressed;
+
 extern Vector2 WindowSize;
 struct MouseData
 {
@@ -31,7 +34,7 @@ public:
 
 		X = x;
 		Y = y;
-		
+
 		x -= WindowSize.x * 0.5f;
 		y -= WindowSize.y * 0.5f;
 		y = -y;

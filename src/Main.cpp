@@ -11,6 +11,9 @@ Vector2 Canvas = Vector2(1.0f, 1.0f);
 
 MouseData Mouse;
 
+bool ButtonEscDown;
+bool ButtonEscPressed;
+
 //Function to read a file provided
 std::string ReadFile(char* path)
 {
@@ -98,7 +101,27 @@ int main(int argc, char** argv)
 			{
 				CloseWindow = true;
 			}
+
+   		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)
+   		{
+   			if (!ButtonEscPressed)
+   			{
+   				ButtonEscDown = true;
+   			}
+   			else
+   			{
+   				ButtonEscDown = false;
+   			}
+
+            ButtonEscPressed = true;
+   		}
+         else
+         {
+            ButtonEscPressed = false;
+         }
 		}
+
+
 
       //Sets the background color
 		//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);

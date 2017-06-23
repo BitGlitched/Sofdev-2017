@@ -10,7 +10,7 @@
 #include <GL/glew.h>
 
 #include "types/Vector2.h"
-#include "types/MouseData.h"
+#include "types/InputData.h"
 #include "types/Texture.hpp"
 #include "types/Shader.hpp"
 #include "types/Color.hpp"
