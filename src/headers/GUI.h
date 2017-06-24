@@ -20,9 +20,14 @@
 #define TEX_BATTERY "data/Battery.png"
 #define TEX_LIGHTBULB "data/Light Bulb.png"
 #define TEX_WIRESTRAIGHT "data/Wire.png"
+#define TEX_WIREVERT "data/WireVert.png"
 #define TEX_WIREBEND "data/Wire2way.png"
+#define TEX_WIREBEND2 "data/WireBend2.png"
+#define TEX_WIREBEND3 "data/WireBend3.png"
+#define TEX_WIREBEND4 "data/WireBend4.png"
 #define TEX_WIRETHREEWAY "data/Wire3way.png"
 #define TEX_HIGHLIGHT "data/Border.png"
+#define TEX_HIGHLIGHT2 "data/Border2.png"
 
 #include "types/GUIElement.h"
 

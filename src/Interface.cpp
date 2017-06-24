@@ -19,9 +19,16 @@ GUIElement integratedCircuit;
 GUIElement currentComponent;
 GUIElement lightBulb;
 GUIElement wireBend;
+GUIElement propWireBend;
+GUIElement wireBend2;
+GUIElement wireBend3;
+GUIElement wireBend4;
 GUIElement wireStraight;
+GUIElement propWireStraight;
+GUIElement propWireVert;
 GUIElement wireThreeWay;
 GUIElement highlight;
+GUIElement highlight2;
 
 std::vector<GUIElement*> components;
 int elementNumber;
@@ -52,8 +59,13 @@ Texture texLight;
 Texture texBattery;
 Texture texWireBend;
 Texture texWireStraight;
+Texture texWireVert;
+Texture texWireBend2;
+Texture texWireBend3;
+Texture texWireBend4;
 Texture texWireThreeWay;
 Texture texHighlight;
+Texture texHighlight2;
 
 void TryAddComponent()
 {
@@ -95,12 +107,22 @@ void InitGUI()
 	texBattery.Load();
 	texWireBend = Texture(TEX_WIREBEND);
 	texWireBend.Load();
+	texWireBend2 = Texture(TEX_WIREBEND2);
+	texWireBend2.Load();
+	texWireBend3 = Texture(TEX_WIREBEND3);
+	texWireBend3.Load();
+	texWireBend4 = Texture(TEX_WIREBEND4);
+	texWireBend4.Load();
 	texWireStraight = Texture(TEX_WIRESTRAIGHT);
 	texWireStraight.Load();
+	texWireVert = Texture(TEX_WIREVERT);
+	texWireVert.Load();
 	texWireThreeWay = Texture(TEX_WIRETHREEWAY);
 	texWireThreeWay.Load();
 	texHighlight = Texture(TEX_HIGHLIGHT);
 	texHighlight.Load();
+	texHighlight2 = Texture(TEX_HIGHLIGHT2);
+	texHighlight2.Load();
 
 	arrow = GUIElement(-388.0f, 319.0f, 1.0f, 1.0f, TEX_ARROWLEFT);
 	forwardArrow = GUIElement(-356.0f, 319.0f, 1.0f, 1.0f, TEX_ARROWRIGHT);
@@ -114,6 +136,10 @@ void InitGUI()
    lightBulb = GUIElement(352.0f, 319.0f, 1.0f, 1.0f, TEX_LIGHTBULB);
    wireBend = GUIElement(-292.0f, 319.0f, 1.0f, 1.0f, TEX_WIREBEND);
    wireStraight = GUIElement(-218.0f, 319.0f, 1.0f, 1.0f, TEX_WIRESTRAIGHT);
+   propWireVert = GUIElement(-550.0f, 206.0f, 1.0f, 1.0f, TEX_WIREVERT);
+   wireBend2 = GUIElement(-550.0f, 206.0f, 1.0f, 1.0f, TEX_WIREBEND2);
+   wireBend3 = GUIElement(-550.0f, 142.0f, 1.0f, 1.0f, TEX_WIREBEND3);
+   wireBend4 = GUIElement(-550.0f, 78.0f, 1.0f, 1.0f, TEX_WIREBEND4);
    wireThreeWay = GUIElement(-144.0f, 319.0f, 1.0f, 1.0f, TEX_WIRETHREEWAY);
    highlight = GUIElement();
    currentComponent = GUIElement();
@@ -206,6 +232,12 @@ void UpdateGUI()
 		}
 	}
 
+	if (selected != NULL && toolSelected == SELECTED)
+	{
+		highlight2.transform = selected->transform;
+		highlight2.Draw();
+	}
+
 	if (ButtonEscPressed)
 	{
 		toolSelected = NONE;
@@ -220,6 +252,78 @@ void UpdateGUI()
 
 	if (toolSelected != NONE && toolSelected != SELECTED)
 	{
+		if (toolSelected == IC)
+		{
+			currentComponent.ChangeImage(texIC);
+			highlight.transform = Vector2(204.0f, 319.0f);
+		}
+		else if (toolSelected == SWITCHOPEN)
+		{
+			currentComponent.ChangeImage(texSwitchOpen);
+			highlight.transform = Vector2(278.0f, 319.0f);
+		}
+		else if (toolSelected == BATTERY)
+		{
+			currentComponent.ChangeImage(texBattery);
+			highlight.transform = Vector2(-18.0f, 319.0f);
+		}
+		else if (toolSelected == RESISTOR)
+		{
+			currentComponent.ChangeImage(texResistor);
+			highlight.transform = Vector2(56.0f, 319.0f);
+		}
+		else if (toolSelected == CAPACITOR)
+		{
+			currentComponent.ChangeImage(texCapacitor);
+			highlight.transform = Vector2(130.0f, 319.0f);
+		}
+		else if (toolSelected == LIGHTBULB)
+		{
+			currentComponent.ChangeImage(texLight);
+			highlight.transform = Vector2(352.0f, 319.0f);
+		}
+		else if (toolSelected == WIRESTRAIGHT)
+		{
+			propWireStraight = GUIElement(-550.0f, 270.0f, 1.0f, 1.0f, TEX_WIRESTRAIGHT);
+			if (propWireStraight.CheckHover() && Mouse.LeftClickDown)
+			{
+				currentComponent.texture = texWireStraight;
+			}
+			else if (propWireVert.CheckHover() && Mouse.LeftClickDown)
+			{
+				currentComponent.texture = texWireVert;
+			}
+			//currentComponent.ChangeImage(texWireStraight);
+			highlight.transform = Vector2(-218.0f, 319.0f);
+		}
+		else if (toolSelected == WIREBEND)
+		{
+			propWireBend = GUIElement(-550.0f, 270.0f, 1.0f, 1.0f, TEX_WIREBEND);
+			if (propWireBend.CheckHover() && Mouse.LeftClickDown)
+			{
+				currentComponent.texture = texWireBend;
+			}
+			else if (wireBend2.CheckHover() && Mouse.LeftClickDown)
+			{
+				currentComponent.texture = texWireBend2;
+			}
+			else if (wireBend3.CheckHover() && Mouse.LeftClickDown)
+			{
+				currentComponent.texture = texWireBend3;
+			}
+			else if (wireBend4.CheckHover() && Mouse.LeftClickDown)
+			{
+				currentComponent.texture = texWireBend4;
+			}
+			//currentComponent.ChangeImage(texWireBend);
+			highlight.transform = Vector2(-292.0f, 319.0f);
+		}
+		else if (toolSelected == WIRETHREEWAY)
+		{
+			currentComponent.ChangeImage(texWireThreeWay);
+			highlight.transform = Vector2(-144.0f, 319.0f);
+		}
+
 		if(!pickerHover && !propertiesHover)
 		{
 			highlight.texture = texHighlight;
@@ -228,51 +332,6 @@ void UpdateGUI()
 			gridLockY = Mouse.y - (Mouse.y % 16);//(shiftViewOffset.y - componentOffsetY);
 			currentComponent.transform.x = gridLockX;
 			currentComponent.transform.y = gridLockY;
-
-			if (toolSelected == IC)
-			{
-				currentComponent.ChangeImage(texIC);
-				highlight.transform = Vector2(204.0f, 319.0f);
-			}
-			else if (toolSelected == SWITCHOPEN)
-			{
-				currentComponent.ChangeImage(texSwitchOpen);
-				highlight.transform = Vector2(278.0f, 319.0f);
-			}
-			else if (toolSelected == BATTERY)
-			{
-				currentComponent.ChangeImage(texBattery);
-				highlight.transform = Vector2(-18.0f, 319.0f);
-			}
-			else if (toolSelected == RESISTOR)
-			{
-				currentComponent.ChangeImage(texResistor);
-				highlight.transform = Vector2(56.0f, 319.0f);
-			}else if (toolSelected == CAPACITOR)
-			{
-				currentComponent.ChangeImage(texCapacitor);
-				highlight.transform = Vector2(130.0f, 319.0f);
-			}
-			else if (toolSelected == LIGHTBULB)
-			{
-				currentComponent.ChangeImage(texLight);
-				highlight.transform = Vector2(352.0f, 319.0f);
-			}
-			else if (toolSelected == WIRESTRAIGHT)
-			{
-				currentComponent.ChangeImage(texWireStraight);
-				highlight.transform = Vector2(-218.0f, 319.0f);
-			}
-			else if (toolSelected == WIREBEND)
-			{
-				currentComponent.ChangeImage(texWireBend);
-				highlight.transform = Vector2(-292.0f, 319.0f);
-			}
-			else if (toolSelected == WIRETHREEWAY)
-			{
-				currentComponent.ChangeImage(texWireThreeWay);
-				highlight.transform = Vector2(-144.0f, 319.0f);
-			}
 
 			if (Mouse.LeftClickDown)
 			{
@@ -304,7 +363,22 @@ void DrawGUI()
 	wireStraight.Draw();
 	wireBend.Draw();
 	wireThreeWay.Draw();
-	if (toolSelected == NONE)
-	{}
-	else highlight.Draw();
+	if (toolSelected == WIRESTRAIGHT)
+	{
+		propWireStraight.Draw();
+		propWireVert.Draw();
+	}
+
+	if (toolSelected == WIREBEND)
+	{
+		propWireBend.Draw();
+		wireBend2.Draw();
+		wireBend3.Draw();
+		wireBend4.Draw();
+	}
+
+	if (toolSelected != NONE)
+	{
+		highlight.Draw();
+	}
 }
